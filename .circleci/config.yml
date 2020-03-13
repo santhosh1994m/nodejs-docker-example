@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - run: aws --version
-      - run: docker build -t Heelo .
+      - run: docker -v
 
 workflows:
     build-and-test:
