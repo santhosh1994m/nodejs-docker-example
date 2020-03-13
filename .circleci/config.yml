@@ -10,6 +10,8 @@ jobs:
       - run: aws --version
       - run: docker -v
       - run: node -v
+      - run: npm -v
+      - run: yarn -v
 
 workflows:
     build-and-test:
