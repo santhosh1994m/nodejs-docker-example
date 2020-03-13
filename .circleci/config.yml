@@ -9,6 +9,7 @@ jobs:
       - checkout
       - run: aws --version
       - run: docker -v
+      - run: node -v
 
 workflows:
     build-and-test:
