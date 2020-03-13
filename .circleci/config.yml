@@ -1,16 +1,17 @@
 version: 2.1
 orbs:
-  node: circleci/node@1.1.6
+  aws-ecr: circleci/aws-ecr@6.7.1
 jobs:
   build-and-test:
     executor:
-      name: node/default
+      name: aws-ecr/default
     steps:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm install
-            - run: npm test
+            - run: aws --version
+            - run: docker build -t Heelo .
+
          
 workflows:
     build-and-test:
