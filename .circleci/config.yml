@@ -11,7 +11,9 @@ jobs:
       - run: docker -v
       - run: node -v
       - run: npm -v
-      - run: yarn -v
+      - run: |
+           npm install
+           npm start
 
 workflows:
     build-and-test:
