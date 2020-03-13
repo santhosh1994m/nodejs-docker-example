@@ -7,9 +7,9 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "lerna run --concurrency 4 --stream --no-bail test",
+    "test": "test run --concurrency 4 --stream --no-bail test",
     "semantic-release": "semantic-release",
-    "pre-commit": "lerna run --concurrency 1 --stream --no-bail precommit"
+    "pre-commit": "test run --concurrency 1 --stream --no-bail precommit"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lerna run --concurrency 1 --stream --no-bail precommit"
+      "pre-commit": "test run --concurrency 1 --stream --no-bail precommit"
     }
   },
   "release": {
