@@ -7,10 +7,8 @@ jobs:
       name: aws-ecr/default
     steps:
       - checkout
-      
-          steps:
-            - run: aws --version
-            - run: docker build -t Heelo .
+      - run: aws --version
+      - run: docker build -t Heelo .
 
 workflows:
     build-and-test:
