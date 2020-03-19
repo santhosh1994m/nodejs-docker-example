@@ -12,10 +12,10 @@ jobs:
       - run: node -v
       - run: npm -v
       - run:    
-      - run:
+      - run: |
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
             unzip sonar-scanner-cli-4.2.0.1873.zip
-      - run:
+      - run: |
            sonar-scanner \
              -Dsonar.projectKey=mynodeproj \
              -Dsonar.sources=. \
