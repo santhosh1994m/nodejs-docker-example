@@ -1,5 +1,6 @@
 {
   "name": "nodejs-docker-example",
+  "version": "1.0.0",
   "description": "Node JS Docker Buildkite example",
   "repository": "https://github.com/buildkite/nodejs-docker-example",
   "license": "MIT",
