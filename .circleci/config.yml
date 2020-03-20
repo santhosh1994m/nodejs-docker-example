@@ -38,4 +38,5 @@ workflows:
     build-and-test:
       jobs:
         - sonar_verify
+        - build-and-test
         
