@@ -26,7 +26,9 @@ jobs:
       - run: aws --version
       - run: docker -v
       - run: node -v
-      - run: npm -v
+      - run: 
+             npm install
+             npm start
       - run: |
           echo Logging in to Amazon ECR...
           $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
