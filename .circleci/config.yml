@@ -5,7 +5,6 @@ orbs:
 jobs:
   sonar_verify:
        executor: java
-        name: java
        steps:
         - checkout
         - run: java -version
