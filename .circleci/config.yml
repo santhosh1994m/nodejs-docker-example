@@ -8,17 +8,17 @@ jobs:
         - checkout
         - run: java -version
         - run:
-          name: install node js  and npm
-          command: | 
+           name: install node js  and npm
+           command: | 
             curl -sL https://deb.nodesource.com/setup_10.x | bash -
             apt install nodejs && node -v && npm -v
         - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
+           name: Restore Yarn Package Cache
+           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
         - run: 
-          name: Install dependencies
-          command: npm install -g yarn && yarn install
+           name: Install dependencies
+           command: npm install -g yarn && yarn install
         - run: |
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip
             unzip sonar-scanner-cli-4.2.0.1873-linux.zip
