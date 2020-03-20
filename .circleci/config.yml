@@ -15,8 +15,7 @@ jobs:
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
             unzip sonar-scanner-cli-4.2.0.1873.zip
       - run: |
-              eval ./sonar-scanner-4.2.0.1873/bin/sonar-scanner 
-             -Dsonar.projectKey=mynodeproj \
+              eval ./sonar-scanner-4.2.0.1873/bin/sonar-scanner  -Dsonar.projectKey=mynodeproj \   
              -Dsonar.sources=. \
              -Dsonar.host.url=http://34.82.15.170 \
              -Dsonar.login=0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6
