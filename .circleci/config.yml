@@ -29,8 +29,10 @@ jobs:
       - run: 
           name: install node js  and npm
           command: | 
-                   sudo node stable
-                   sudo npm install -g node
+                   sudo npm cache clean -f 
+                   sudo npm install -g n
+                   sudo n stable
+                   node -v
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
