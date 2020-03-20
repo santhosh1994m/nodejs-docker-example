@@ -30,7 +30,7 @@ jobs:
           name: install node js  and npm
           command: | 
                     npm cache clean -f 
-                    npm install -g n
+                    sudo npm install -g n
                     n stable
                     node -v
       - restore_cache:
