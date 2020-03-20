@@ -10,12 +10,8 @@ jobs:
         - run:
            name: install node js  and npm
            command: | 
-             sudo curl -sL https://deb.nodesource.com/setup_10.x | bash -
-             sudo apt install nodejs && node -v && npm -v
-        - restore_cache:
-           name: Restore Yarn Package Cache
-           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+              curl -sL https://deb.nodesource.com/setup_10.x | bash -
+              apt install nodejs && node -v && npm -v
         - run: 
            name: Install dependencies
            command: sudo npm install -g yarn && yarn install
