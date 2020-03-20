@@ -27,8 +27,32 @@ jobs:
       - run: docker -v
       - run: node -v
       - run: 
+          name: Install dependencies
+          command: npm install -g yarn && yarn install
+      - save_cache:
+          name: save cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run: 
+          name: commit lint
+          command: yarn commitlint-circle
+      - run: 
+          name:  install  expo-cli
+          command: npm install -g expo-cli
+      - run: 
+          name: build common package
+          command: cd packages/common && yarn build:only  
+      - run: 
+          name: build common-ui package
+          command: cd packages/common-ui && yarn build
+      - run: 
+          name: build api server package
+          command: cd packages/api-server && yarn build
+      - run: 
              npm install
              npm start
+             npm run semantic-release || true
       - run: |
           echo Logging in to Amazon ECR...
           $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
