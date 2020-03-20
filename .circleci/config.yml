@@ -5,7 +5,7 @@ orbs:
 jobs:
   sonar_verify:
        executor:
-        name: ci-poc/java@0.0.22
+        name: java/default
        steps:
         - checkout
         - run: java -version
