@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@6.7.1
-orbs:
   java: ci-poc/java@0.0.22
 jobs:
     sonar_verify:
@@ -13,7 +12,7 @@ jobs:
         - run: |
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
             unzip sonar-scanner-cli-4.2.0.1873.zip
-         - run: 
+        - run: 
             name: Run Sonarqube scanner
             command: |
              eval ./sonar-scanner-4.2.0.1873/bin/sonar-scanner  -Dsonar.projectKey=mynodeproj \   
