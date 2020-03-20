@@ -1,6 +1,5 @@
 version: 2.1
 orbs:
-  aws-ecr: circleci/aws-ecr@6.7.1
   java: ci-poc/java@0.0.22
 jobs:
   sonar_verify:
