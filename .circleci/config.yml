@@ -8,8 +8,9 @@ jobs:
         - checkout
         - run: java -version
         - run: |
-               node -v
-               npm -v
+               curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+               sudo apt install nodejs
+        - run: node -v       
         - run: |
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip
             unzip sonar-scanner-cli-4.2.0.1873-linux.zip
