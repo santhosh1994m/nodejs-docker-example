@@ -12,7 +12,7 @@ jobs:
       - run: node -v
       - run: npm -v
       - run: |
-              sudo yum install java-11-openjdk-devel
+              sudo apt-get upgrade java-11-openjdk-devel
               java -version
       - run: |
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip
