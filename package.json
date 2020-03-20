@@ -1,13 +1,65 @@
 {
   "name": "nodejs-docker-example",
-  "version": "1.0.0",
-  "description": "Node JS Docker Buildkite example",
-  "repository": "https://github.com/buildkite/nodejs-docker-example",
-  "license": "MIT",
+  "version": "0.0.0-development",
+  "main": "index.js",
+   "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "test": "mocha ./test.js"
+    "test": "mocha ./test.js",
+    "semantic-release": "semantic-release"  
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buildkite/nodejs-docker-example"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "restricted"
   },
   "devDependencies": {
-    "mocha": "6.2.2"
+    "mocha": "6.2.2",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@ls-age/commitlint-circle": "^1.0.0",
+    "@semantic-release/changelog": "^3.0.6",
+    "@semantic-release/commit-analyzer": "^6.3.3",
+    "@semantic-release/git": "^7.0.18",
+    "@semantic-release/npm": "^5.3.4",
+    "@semantic-release/release-notes-generator": "^7.3.5",
+    "commitlint": "^8.2.0",
+    "eslint-plugin-flowtype": "^4.6.0",
+    "husky": "^4.0.0-beta.5",
+    "lerna": "^3.19.0",
+    "semantic-release": "^15.13.31"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "release": {
+    "branch": "master",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "publish": [
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ],
+    "npmPublish": false
   }
 }
