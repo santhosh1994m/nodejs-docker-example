@@ -29,8 +29,8 @@ jobs:
       - run: 
           name: install node js  and npm
           command: | 
-            curl -sL https://deb.nodesource.com/setup_10.x | bash -T
-            apt install nodejs && node -v && npm -v
+                   sudo n stable
+                   sudo npm install -g n
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
