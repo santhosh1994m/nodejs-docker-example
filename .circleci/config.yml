@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  ci-poc/java@0.0.22: ci-poc/java@0.0.22
 jobs:
   sonar_verify:
        executor:
