@@ -1,3 +1,6 @@
+orbs:
+  aws-ecr: circleci/aws-ecr@6.7.1
+
 version: 2.1
 jobs:
   sonar_verify:
@@ -17,7 +20,7 @@ jobs:
              
   build-and-test:
     executor:
-      name: circleci/aws-ecr@6.7.1
+      name: aws-ecr/default
     steps:
       - checkout
       - run: aws --version
