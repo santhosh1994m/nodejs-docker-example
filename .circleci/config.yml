@@ -3,7 +3,7 @@ jobs:
   sonar_verify:
        executor:
        docker:
-        - image: circleci/ruby:2.4.2-jessie-node
+        - image: circleci/openjdk
        steps:
         - checkout
         - run: java -version
