@@ -26,10 +26,7 @@ jobs:
          - checkout
          - run:
             name: update-npm
-            command: sudo npm install -g npm@latest
-         - run:
-            name: install-npm-wee
-            command: npm install
+            command: npm install -g npm@latest
          - run: 
             name: commit lint
             command: yarn commitlint-circle
