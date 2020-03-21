@@ -4,9 +4,7 @@ orbs:
 version: 2.1
 jobs:
   semantic_version:
-       executor:
-       docker:
-        - image:  aws-ecr/default
+       executor: aws-ecr/default
        steps:
         - checkout
         - run:
