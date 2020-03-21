@@ -21,27 +21,21 @@ jobs:
   build-and-check:
         executor:
         docker:
-        image: cimg/base:2020.01        
-        steps:
+        image: circleci/node:4.8.2       
+         steps:
          - checkout
          - run:
-            name: install node js  and npm
-            command: | 
-             curl -sL https://deb.nodesource.com/setup_10.x | bash -
-             apt install nodejs && node -v && npm -v
+            name: update-npm
+            command: 'sudo npm install -g npm@latest'
          - restore_cache:
-            name: Restore Yarn Package Cache
-            keys:
-              - yarn-packages-{{ checksum "yarn.lock" }}
-         - run: node -v  
-         - run: 
-            name: Install dependencies
-            command: npm install -g yarn && yarn install
+            key: dependency-cache-{{ checksum "package-lock.json" }}
+         - run:
+            name: install-npm-wee
+            command: npm install
          - save_cache:
-            name: save cache
-            key: yarn-packages-{{ checksum "yarn.lock" }}
+            key: dependency-cache-{{ checksum "package-lock.json" }}
             paths:
-              - ~/.cache/yarn
+             - ./node_modules
          - run: 
             name: commit lint
             command: yarn commitlint-circle
