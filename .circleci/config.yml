@@ -20,10 +20,20 @@ jobs:
              
   build-and-check:
         executor:
-         name: node/default           
+        docker:
+        image: cimg/base:2020.01        
         steps:
          - checkout
-         - run: node -v
+         - run:
+            name: install node js  and npm
+            command: | 
+             curl -sL https://deb.nodesource.com/setup_10.x | bash -
+             apt install nodejs && node -v && npm -v
+         - restore_cache:
+            name: Restore Yarn Package Cache
+            keys:
+              - yarn-packages-{{ checksum "yarn.lock" }}
+         - run: node -v  
          - run: 
             name: Install dependencies
             command: npm install -g yarn && yarn install
