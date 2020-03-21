@@ -9,84 +9,11 @@ jobs:
         - image: circleci/node
        steps:
         - checkout
-        - run: node -v       
-        - run: |
-            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip
-            unzip sonar-scanner-cli-4.2.0.1873-linux.zip
-        - run: 
-            name: Run Sonarqube scanner
-            command: |
-             eval ./sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner  -Dsonar.projectKey=mynodeproj -Dsonar.sources=.  -Dsonar.host.url=http://34.82.15.170 -Dsonar.login=0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6
-             
-  build-and-check:
-     executor:
-       docker:
-        - image: circleci/node
-       steps:
-        - checkout
-        - run: node -v       
-        
-  build-and-test:
-    executor:
-     name: aws-ecr/default
-     steps:
-      - checkout
-      - run: aws --version
-      - run: docker -v
-      - run: node -v
-      - run: 
-          name: install node js  and npm
-          command: | 
-                    npm cache clean -f 
-                    sudo npm install -g n
-                    n stable
-                    node -v
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run: 
-          name: Install dependencies
-          command: npm install -g yarn && yarn install
-      - save_cache:
-          name: save cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-      - run: 
-          name: commit lint
-          command: yarn commitlint-circle
-      - run: 
-          name:  install  expo-cli
-          command: npm install -g expo-cli
-      - run: 
-          name: build common package
-          command: cd packages/common && yarn build:only  
-      - run: 
-          name: build common-ui package
-          command: cd packages/common-ui && yarn build
-      - run: 
-          name: build api server package
-          command: cd packages/api-server && yarn build
-      - run: 
-             npm install
-             npm start
-             npm run semantic-release || true
-      - run: |
-          echo Logging in to Amazon ECR...
-          $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - run: |
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          echo Building the Docker image.
-          docker build  -t $IMAGE_REPO_NAME:$PACKAGE_VERSION . --file Dockerfile
-          docker tag $IMAGE_REPO_NAME:$PACKAGE_VERSION $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$PACKAGE_VERSION
-          echo Pushing the Docker image to ECR.
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$PACKAGE_VERSION
-          
+        - run: node -
           
           
 workflows:
     build-and-test:
       jobs:
-        - build-and-check
+        - sonar_verify
         
