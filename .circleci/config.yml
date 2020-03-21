@@ -26,10 +26,7 @@ jobs:
           command: yarn commitlint-circle
         - run:
           name:  release
-          command: |
-             OLDER_VERSION=$(node -p "require('./package.json').version")
-             echo "export OLDER_VERSION=$OLDER_VERSION" >> $BASH_ENV
-             npm run semantic-release || true
+          command: npm run semantic-release || true
         - save_cache:
           name:
           key: yarn-packages-{{ checksum "yarn.lock" }}
