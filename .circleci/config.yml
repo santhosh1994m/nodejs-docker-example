@@ -6,14 +6,10 @@ jobs:
      steps:
         - checkout
         - run:
-          name: install node js  and npm
-          command: | 
-            curl -sL https://deb.nodesource.com/setup_10.x | bash -
-            apt install nodejs && node -v && npm -v
-        - restore_cache:
-           name: Restore Yarn Package Cache
-           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+           name: install node js  and npm
+           command: | 
+                 curl -sL https://deb.nodesource.com/setup_10.x | bash -
+                 apt install nodejs && node -v && npm -v
         - run: 
            name: Install dependencies
            command: npm install -g yarn && yarn install
@@ -23,11 +19,6 @@ jobs:
         - run:
            name:  release
            command: npm run semantic-release || true
-        - save_cache:
-           name: cache the yarn
-           key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
         - run: 
           name:  install  expo-cli
           command: npm install -g expo-cli          
