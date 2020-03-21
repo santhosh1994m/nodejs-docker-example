@@ -9,26 +9,35 @@ jobs:
         - image: circleci/node
        steps:
         - checkout
-        - run: node -v
-        - run: 
-           name: Install dependencies
-           command: npm install 
-        - run: 
-           name: commit lint
-           command: yarn commitlint-circle
-        - run: 
-           name:  install  expo-cli
-           command: npm install -g expo-cli
-        - run:
+       - run:
+          name: install node js  and npm
+          command: | 
+            curl -sL https://deb.nodesource.com/setup_10.x | bash -
+            apt install nodejs && node -v && npm -v
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: 
+          name: Install dependencies
+          command: npm install -g yarn && yarn install
+      - run: 
+          name: commit lint
+          command: yarn commitlint-circle
+      - run:
           name:  release
           command: |
              OLDER_VERSION=$(node -p "require('./package.json').version")
              echo "export OLDER_VERSION=$OLDER_VERSION" >> $BASH_ENV
              npm run semantic-release || true
-        - run: 
+      - save_cache:
+          name:
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run: 
           name:  install  expo-cli
-          command: npm install -g expo-cli
-          
+          command: npm install -g expo-cli          
 workflows:
     build-and-test:
       jobs:
