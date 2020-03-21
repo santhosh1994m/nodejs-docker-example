@@ -5,6 +5,11 @@ jobs:
      - image: google/cloud-sdk
    steps:
         - checkout
+        - run: 
+          name: install the node and npm
+          command: |
+             curl -sL https://deb.nodesource.com/setup_10.x | bash -
+             apt install nodejs && node -v && npm -v
              
 workflows:
     build-and-test:
