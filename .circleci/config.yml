@@ -6,7 +6,7 @@ jobs:
   semantic_version:
      docker:
       - image: google/cloud-sdk
-       steps:
+     steps:
         - checkout
         - run:
           name: install node js  and npm
