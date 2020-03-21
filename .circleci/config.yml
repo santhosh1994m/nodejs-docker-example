@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   semantic_version:
    docker:
-     - image: google/cloud-sdk
+     - image: aws-ecr/default
    steps:
         - checkout
         - run: 
