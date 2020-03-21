@@ -1,6 +1,6 @@
 orbs:
   aws-ecr: circleci/aws-ecr@6.7.1
-  node: circleci/node@1.1.6
+
 version: 2.1
 jobs:
   sonar_verify:
@@ -18,43 +18,9 @@ jobs:
             command: |
              eval ./sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner  -Dsonar.projectKey=mynodeproj -Dsonar.sources=.  -Dsonar.host.url=http://34.82.15.170 -Dsonar.login=0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6
              
-  build-and-check:
-        executor:
-         name: node/default           
-        steps:
-         - checkout
-         - run: node -v
-         - run: 
-            name: Install dependencies
-            command: npm install -g yarn && yarn install
-         - save_cache:
-            name: save cache
-            key: yarn-packages-{{ checksum "yarn.lock" }}
-            paths:
-              - ~/.cache/yarn
-         - run: 
-            name: commit lint
-            command: yarn commitlint-circle
-         - run: 
-            name:  install  expo-cli
-            command: npm install -g expo-cli
-         - run: 
-            name: build common package
-            command: cd packages/common && yarn build:only  
-         - run: 
-            name: build common-ui package
-            command: cd packages/common-ui && yarn build
-         - run: 
-            name: build api server package
-            command: cd packages/api-server && yarn build
-         - run: 
-             npm install
-             npm start
-             npm run semantic-release || true    
-          
   build-and-test:
     executor:
-     name: aws-ecr/default
+      name: aws-ecr/default
     steps:
       - checkout
       - run: aws --version
@@ -95,9 +61,9 @@ jobs:
           name: build api server package
           command: cd packages/api-server && yarn build
       - run: 
-             npm install
-             npm start
-             npm run semantic-release || true
+           sudo  npm install
+           sudo npm start
+           sudo  npm run semantic-release || true
       - run: |
           echo Logging in to Amazon ECR...
           $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
@@ -108,11 +74,8 @@ jobs:
           docker tag $IMAGE_REPO_NAME:$PACKAGE_VERSION $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$PACKAGE_VERSION
           echo Pushing the Docker image to ECR.
           docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$PACKAGE_VERSION
-          
-          
-          
 workflows:
     build-and-test:
       jobs:
-        - build-and-check
+        - build-and-test
         
