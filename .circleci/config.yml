@@ -9,23 +9,21 @@ jobs:
         - image: circleci/node
        steps:
         - checkout
-        - run: node -
+        - run: node -v
         - run: 
-        - run: 
-          name: Install dependencies
-          command: npm install -g yarn && yarn install
+           name: Install dependencies
+           command: npm install -g yarn && yarn install
         - save_cache:
-          name: save cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+           name: save cache
+           key: yarn-packages-{{ checksum "yarn.lock" }}
+           paths:
+             - ~/.cache/yarn
         - run: 
-          name: commit lint
-          command: yarn commitlint-circle
+           name: commit lint
+           command: yarn commitlint-circle
         - run: 
-          name:  install  expo-cli
-          command: npm install -g expo-cli
-          
+           name:  install  expo-cli
+           command: npm install -g expo-cli
           
 workflows:
     build-and-test:
