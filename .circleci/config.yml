@@ -1,8 +1,9 @@
+orbs:
+ aws-ecr: circleci/aws-ecr@6.7.1
 version: 2.1
 jobs:
   semantic_version:
-   docker:
-     - image: circleci/aws-ecr
+   executor: aws-ecr/default
    steps:
         - checkout
         - run: 
