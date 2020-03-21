@@ -27,26 +27,7 @@ jobs:
          - run:
             name: update-npm
             command: npm install -g npm@latest
-         - run: 
-            name: commit lint
-            command: yarn commitlint-circle
-         - run: 
-            name:  install  expo-cli
-            command: npm install -g expo-cli
-         - run: 
-            name: build common package
-            command: cd packages/common && yarn build:only  
-         - run: 
-            name: build common-ui package
-            command: cd packages/common-ui && yarn build
-         - run: 
-            name: build api server package
-            command: cd packages/api-server && yarn build
-         - run: 
-            sudo npm install
-            sudo npm start
-            sudo npm run semantic-release || true    
-          
+        
   build-and-test:
     executor:
      name: aws-ecr/default
