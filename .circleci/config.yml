@@ -24,9 +24,7 @@ jobs:
           - image: circleci/node     
         steps:
          - checkout
-         - run:
-            name: update-npm
-            command: npm install -g npm@latest
+         - run: node -v
         
   build-and-test:
     executor:
