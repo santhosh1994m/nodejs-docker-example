@@ -22,7 +22,7 @@ jobs:
         executor:
         docker:
         image: circleci/node:4.8.2       
-         steps:
+        steps:
          - checkout
          - run:
             name: update-npm
@@ -59,7 +59,7 @@ jobs:
   build-and-test:
     executor:
      name: aws-ecr/default
-    steps:
+     steps:
       - checkout
       - run: aws --version
       - run: docker -v
