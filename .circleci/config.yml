@@ -15,21 +15,21 @@ jobs:
             curl -sL https://deb.nodesource.com/setup_10.x | bash -
             apt install nodejs && node -v && npm -v
         - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
+           name: Restore Yarn Package Cache
+           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
         - run: 
-          name: Install dependencies
-          command: npm install -g yarn && yarn install
+           name: Install dependencies
+           command: npm install -g yarn && yarn install
         - run: 
-          name: commit lint
-          command: yarn commitlint-circle
+           name: commit lint
+           command: yarn commitlint-circle
         - run:
-          name:  release
-          command: npm run semantic-release || true
+           name:  release
+           command: npm run semantic-release || true
         - save_cache:
-          name:
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+           name: cache the yarn
+           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
         - run: 
