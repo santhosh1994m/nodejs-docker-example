@@ -5,15 +5,6 @@ jobs:
       - image: 'circleci/node:latest'
     steps:
       - checkout
-      - run:
-          name: install node js  and npm
-          command: | 
-            curl -sL https://deb.nodesource.com/setup_10.x | bash -
-            apt install nodejs && node -v && npm -v
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
       - run: 
           name: Install dependencies
           command: npm install -g yarn && yarn install
