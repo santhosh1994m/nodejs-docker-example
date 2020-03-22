@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run: 
           name: Install dependencies
-          command: npm install -g yarn && yarn install
+          command: npm install 
       - run: 
           name: commit lint
           command: yarn commitlint-circle
