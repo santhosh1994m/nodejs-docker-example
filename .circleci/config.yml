@@ -3,6 +3,20 @@ orbs:
   node: circleci/node@1.1.6
 version: 2.1
 jobs:
+  sonar_verify:
+       executor:
+       docker:
+        - image: circleci/node
+       steps:
+        - checkout
+        - run: node -v       
+        - run: |
+            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip
+            unzip sonar-scanner-cli-4.2.0.1873-linux.zip
+        - run: 
+            name: Run Sonarqube scanner
+            command: |
+                  eval ./sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner  -Dsonar.projectKey=mynodeproj -Dsonar.sources=.  -Dsonar.host.url=http://34.82.15.170 -Dsonar.login=0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6
   build-and-test:
     executor:
       name: aws-ecr/default
