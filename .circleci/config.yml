@@ -1,15 +1,16 @@
 version: 2.1
 jobs:
   semantic_version:
-   docker:
-    - image: circleci/node:10-stretch
-   steps:
-        - checkout
-        - run: 
-             name: install the node and npm
-             command: |
-                curl -sL https://deb.nodesource.com/setup_10.x | bash -
-                apt install nodejs && node -v && npm -v
+     docker:
+      - image: 'circleci/node:latest'
+    steps:
+      - checkout
+      - run:
+        name: install
+        command: npm install
+      - run:
+        name: release
+        command: npm run semantic-release || true
              
 workflows:
     build-and-test:
