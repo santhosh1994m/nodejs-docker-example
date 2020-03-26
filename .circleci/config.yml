@@ -1,10 +1,10 @@
 orbs:
-  node: circleci/node@1.1.6
+  node-tools: bwp-orbs/node-tools@3.0.0
 version: 2.1
 jobs:
   semantic_and_sonar_verify:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node-tools:latest'
     steps:
       - checkout         
       - run: |
@@ -13,18 +13,7 @@ jobs:
             name: Run Sonarqube scanner
             command: |
                   eval /usr/local/bin/sonar-scanner  -Dsonar.projectKey=mynodeproj -Dsonar.sources=.  -Dsonar.host.url=http://35.233.231.234 -Dsonar.login=0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6
-    
-      - run: | 
-            $uri2 = "https://sonarqube.net/ApiByPass/api/qualitygates/project_status?projectKey=mynodeproj"
-            $response2 = Invoke-RestMethod -Method Get -UseDefaultCredentials -ContentType application/json -Uri $uri2 -UserAgent "ExampleScript/1.0.0.0"
-            Write-Debug $response2
-            if($response2.projectStatus){
-            $projectStatus = $response2.projectStatus
-            Write-Host "Great, your status is $($projectStatus.status)"
-            } 
-            else {
-            Write-Host "Unfortionaly, quality gate failed"
-             }
+   
           
 workflows:
     build-and-check:
