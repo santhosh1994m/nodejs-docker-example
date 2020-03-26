@@ -1,15 +1,7 @@
 orbs:
-        sonarcloud: extendaretail/sonarcloud@1.0.0
-      version: 2.1
-      workflows:
-        main:
-          jobs:
-          - commit:
-              context: sonarcloud
-          - sonarcloud/check_quality_gate:
-              context: sonarcloud
-              requires:
-              - commit
+    sonarcloud: extendaretail/sonarcloud@1.0.0
+     version:2.1
+     
 executors:
   node:
     description: |
@@ -28,4 +20,12 @@ jobs:
     - attach_workspace:
         at: .
     - check_quality_gate
-version: 2.1
+  workflows:
+        main:
+          jobs:
+          - commit:
+              context: sonarcloud
+          - sonarcloud/check_quality_gate:
+              context: sonarcloud
+              requires:
+              - commit
