@@ -9,9 +9,6 @@ jobs:
         - image: 'circleci/node:10'
        steps:
         - checkout
-        - run: node -v
-        - run: |
-                sudo npm install -g sonarqube-scanner
         - run: 
             name: Run Sonarqube scanner
             command: |
