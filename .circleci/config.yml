@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   semantic_and_sonar_verify:
     docker:
-      - image: 'circleci/node-tools'
+      - image: 'circleci/node-tools:3.0.0'
     steps:
       - checkout         
       - run: |
