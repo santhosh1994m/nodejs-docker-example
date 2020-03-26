@@ -28,3 +28,4 @@ workflows:
         -   test:
              required:
               - semantic_and_sonar_verify
+              
