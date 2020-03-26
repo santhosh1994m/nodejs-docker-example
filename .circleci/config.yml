@@ -3,6 +3,9 @@ orbs:
 version: 2.1
 jobs:
   semantic_and_sonar_verify:
+    executor:
+     name: node-tools
+    
     steps:
       - checkout         
       - run: |
