@@ -16,6 +16,6 @@ jobs:
    
           
 workflows:
-    build-and-check:
+     build-and-check:
       jobs:
         - semantic_and_sonar_verify
