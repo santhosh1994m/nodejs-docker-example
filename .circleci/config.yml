@@ -1,20 +1,31 @@
-
 orbs:
-  sonarcloud: extendaretail/sonarcloud@0.0.2
-version: 2.1
+        sonarcloud: extendaretail/sonarcloud@1.0.0
+      version: 2.1
+      workflows:
+        main:
+          jobs:
+          - commit:
+              context: sonarcloud
+          - sonarcloud/check_quality_gate:
+              context: sonarcloud
+              requires:
+              - commit
+executors:
+  node:
+    description: |
+      Docker executor with Node.
+    docker:
+    - image: circleci/node:10
 jobs:
-  sonar_verify:
-       executor:
-       docker: 
-        - image: 'circleci/node:10'
-       steps:
-        - checkout
-        - run: 
-            name: Run Sonarqube scanner
-            command: |
-                    sonar-scanner  -Dsonar.projectKey=mynodeproj -Dsonar.sources=.  -Dsonar.host.url=http://35.233.231.234 -Dsonar.login=0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6
- 
-workflows:
-    build-and-check:
-      jobs:
-        - sonar_verify
+  check_quality_gate:
+    description: |
+      Wait for the scanner results. This job assumes an analysis has been
+      run and will wait for SonarCloud to update the quality gate for the
+      analysis.
+    executor: node
+    steps:
+    - checkout
+    - attach_workspace:
+        at: .
+    - check_quality_gate
+version: 2.1
