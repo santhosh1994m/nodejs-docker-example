@@ -16,7 +16,7 @@ jobs:
             command: | 
                     ANALYSIS_ID=$(curl -XGET -s -u 0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6: http://35.233.231.234/api/ce/task\?id\=$CE_TASK_ID | jq -r .task.analysisId)
                     STATUS=$(curl -XGET -s -u 0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6: http://35.233.231.234/api/qualitygates/project_status?analysisId=$ANALYSIS_ID | jq -r .projectStatus.status)  
-                    if [ $STATUS = "ERROR" ]
+                    if [ $STATUS != "ERROR" ]
                     then
                     echo "Qualitygate failed."
                     exit 1
