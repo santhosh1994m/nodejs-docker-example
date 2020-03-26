@@ -27,7 +27,6 @@ jobs:
           
 workflows:
      build-and-check:
-      jobs:     
-        exector: sonar_analysis
+      jobs:
          - semantic_and_sonar_verify
  
