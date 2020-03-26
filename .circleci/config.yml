@@ -1,11 +1,10 @@
 orbs:
-  node-tools: bwp-orbs/node-tools@3.0.0
+  sonar_analysis: taptapnetworks/sonar_analysis@2.0.0
 version: 2.1
 jobs:
   semantic_and_sonar_verify:
     docker:
-     - image: node-tools
-    
+      - image: 'circleci/node:latest'  
     steps:
       - checkout         
       - run: |
