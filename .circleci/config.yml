@@ -5,7 +5,7 @@ version: 2.1
 jobs:
   sonar_verify:
        executor:
-       docker:
+       docker: 
         - image: 'circleci/node:10'
        steps:
         - checkout
