@@ -3,8 +3,8 @@ orbs:
 version: 2.1
 jobs:
   semantic_and_sonar_verify:
-    docker:
-      - image: 'node-tools:3.0.0'
+    executor:
+      name: 'node-tools'
     steps:
       - checkout         
       - run: |
