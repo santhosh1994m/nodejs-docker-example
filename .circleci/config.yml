@@ -1,5 +1,3 @@
-orbs:
-  sonar_analysis: taptapnetworks/sonar_analysis@2.0.0
 version: 2.1
 jobs:
   semantic_and_sonar_verify:
@@ -13,7 +11,18 @@ jobs:
             name: Run Sonarqube scanner
             command: |
                   eval /usr/local/bin/sonar-scanner  -Dsonar.projectKey=mynodeproj -Dsonar.sources=.  -Dsonar.host.url=http://35.233.231.234 -Dsonar.login=0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6
-          
+      - run: 
+            name: quality gate
+            command: | 
+                    STATUS=$(curl -XGET -s -u 0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6 : http://35.233.231.234/api/qualitygates/project_status?analysisId=$ANALYSIS_ID | jq -r .projectStatus.status)  
+                    if [ $STATUS = "ERROR" ]
+                    then
+                    echo "Qualitygate failed."
+                    exit 1
+                    fi
+                    echo "Sonar Qualitygate is OK."
+                    exit 0
+                  
           
 workflows:
      build-and-check:
