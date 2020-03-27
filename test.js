@@ -6,3 +6,4 @@ describe('String#split', function(){
   });
 });
 
+if c
