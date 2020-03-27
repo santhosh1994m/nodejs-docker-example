@@ -10,11 +10,11 @@ jobs:
       - run: 
             name: Run Sonarqube scanner
             command: |
-                  eval /usr/local/bin/sonar-scanner  -Dsonar.projectKey=mynodeproj -Dsonar.sources=.  -Dsonar.host.url=http://35.233.231.234 -Dsonar.analysis.mode=publish -Dsonar.working.directory=/home/circleci/.sonar/ -Dsonar.login=0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6
+                  eval /usr/local/bin/sonar-scanner  -Dsonar.projectKey=mynodeproj -Dsonar.sources=.  -Dsonar.host.url=http://35.233.231.234 -Dsonar.analysis.mode=publish -Dsonar.working.directory=/home/circleci/.sonar -Dsonar.login=0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6
       - run: 
             name: quality gate
             command: | 
-                    SONAR_RESULT=${2:-"/home/circleci/.sonar//report-task.txt"}
+                    SONAR_RESULT=${2:-"/home/circleci/.sonar/report-task.txt"}
                     SONAR_SERVER=${1:-"http://35.233.231.234"}
                     SONAR_API_TOKEN="0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6"
                     if [ -z $SONAR_API_TOKEN ]
