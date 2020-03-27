@@ -14,7 +14,7 @@ jobs:
       - run: 
             name: quality gate
             command: | 
-                    SONAR_RESULT=${2:-"/home/circleci/.sonar/report-task.txt"}
+                    SONAR_RESULT=${2:-".scannerwork/report-task.txt"}
                     SONAR_SERVER=${1:-"http://35.233.231.234"}
                     SONAR_API_TOKEN="0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6"
                     if [ -z $SONAR_API_TOKEN ]
