@@ -23,7 +23,7 @@ jobs:
                     exit 1 
                     fi
                     
-                    fi [ ! -f $SONAR_RESULT ]
+                    if [ ! -f $SONAR_RESULT ]
                     then
                     echo "Sonar result does not exist"
                     exit 1
