@@ -23,7 +23,7 @@ jobs:
                     exit 1 
                     fi
                     
-                    if [ ! -f $SONAR_RESULT ]
+                    fi [ ! -f $SONAR_RESULT ]
                     then
                     echo "Sonar result does not exist"
                     exit 1
@@ -39,7 +39,7 @@ jobs:
                     HTTP_STATUS=$(curl -s -o /dev/null -w '%{http_code}' -u 0a0eca3f1ec3dea8fbc7463036d8e7061cb956f6: $SONAR_SERVER/api/ce/task\?id\=$CE_TASK_ID)
  
                     if [  "$HTTP_STATUS" -ne 200 ]
-                    then1
+                    then
                     echo "Sonar API Token has no access rights."
                     exit 1
                     fi
